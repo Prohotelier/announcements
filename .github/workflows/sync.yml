@@ -1,28 +1,29 @@
 name: Sync from Channex
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *"  # κάθε 30 λεπτά
-  workflow_dispatch:        # επιτρέπει να το τρέχεις και χειροκίνητα
+    - cron: "0 */6 * * *" # κάθε 6 ώρες (προαιρετικό)
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Download latest announcements.md from Channex
-        run: curl -s -o announcements.md https://raw.githubusercontent.com/ChannexIO/announcements/master/announcements.md
+      - name: Fetch latest announcements from Channex
+        run: |
+          curl -s -L https://raw.githubusercontent.com/ChannexIO/announcements/master/announcements.md -o announcements.md
 
       - name: Commit and push if changed
         run: |
+          git config user.name "Prohotelier Bot"
+          git config user.email "bot@prohotelier.gr"
           if [ -n "$(git status --porcelain announcements.md)" ]; then
-            git config user.name "Prohotelier Bot"
-            git config user.email "bot@prohotelier.gr"
             git add announcements.md
             git commit -m "Sync from ChannexIO"
-            git push
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
           else
             echo "No updates detected."
           fi
