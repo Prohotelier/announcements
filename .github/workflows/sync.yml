@@ -16,20 +16,18 @@ jobs:
         run: |
           curl -s -L https://raw.githubusercontent.com/ChannexIO/announcements/master/announcements.md -o announcements.md
 
-
-- name: Clean up Channex mentions
+      - name: Clean up Channex mentions
         run: |
           sed -i 's/channex\.io/prohotelier\.gr/gI' announcements.md
           sed -i 's/Channex/Prohotelier/gI' announcements.md
- 
-      
+
       - name: Commit and push if changed
         run: |
           git config user.name "Prohotelier Bot"
           git config user.email "bot@prohotelier.gr"
           if [ -n "$(git status --porcelain announcements.md)" ]; then
             git add announcements.md
-            git commit -m "Sync from ChannexIO"
+            git commit -m "Sync from ChannexIO and cleanup"
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
           else
             echo "No updates detected."
