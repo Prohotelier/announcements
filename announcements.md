@@ -1,4 +1,3 @@
-announcements.md
 ### October Update 🚀 (Oct 2025)
 
 New Blog Post: [Unlocking the Power of Airbnb Review Tags for Your Property](https://channex.io/blog/airbnb-review-tags-channex))
