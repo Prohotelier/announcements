@@ -17,3 +17,4 @@ New Blog Post: [Unlocking the Power of Airbnb Review Tags for Your Property](htt
 - View Roadmap: https://feedback.channex.io/roadmap
 
 [Link to Changelog](https://docs.channex.io/changelog)
+Test update from Prohotelier 🚀
