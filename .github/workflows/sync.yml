@@ -3,7 +3,7 @@ name: Sync from Channex
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *" # κάθε 6 ώρες (προαιρετικό)
+    - cron: "*/30 * * * *"
 
 jobs:
   sync:
